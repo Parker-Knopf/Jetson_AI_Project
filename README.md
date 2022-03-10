@@ -1,2 +1,2 @@
-zxc#sdasdZZ Jetson_AI_Project
+# Jetson_AI_Project
 Jetson AI Specialist
