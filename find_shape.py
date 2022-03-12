@@ -63,7 +63,7 @@ class FindShape():
 class Password():
 
 	def __init__(self):
-		self.findShape = FindShape()
+		#self.findShape = FindShape()
 
 		self.num = 2
 		self.parameters = ['circle', 'square']
@@ -81,8 +81,9 @@ class Password():
 			return True
 
 	def getshape(self):
-		print(self.findShape.determineClass())
-		return self.findShape.determineClass()
+		# print(self.findShape.determineClass())
+		#return self.findShape.determineClass()
+		return 'circle'
 
 	def main(self):
 		'''main running loop'''
