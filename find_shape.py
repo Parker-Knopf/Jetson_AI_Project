@@ -71,10 +71,10 @@ class Password():
 
 
 	def createPassword(self, num, parameters):
-		password = []
+		password = [num]
 		for i in range(0, num):
 			print(i)
-			#password[i] = random.choice(parameters)
+			password[i] = random.choice(parameters)
 		return password
 
 	def checkPassword(self, attempt):
@@ -90,14 +90,14 @@ class Password():
 		'''main running loop'''
 
 		try:
+
+			print('\nA new password has been created!\n')
+			self.createPassword(self.num, self.parameters)
 			do = 1
 			while do:
-				print('\nA new password has been created!\n')
-				self.createPassword(self.num, self.parameters)
-
 				print('Try to guess the password now by placing either a circle or square in the frame of the camera.')
 
-				attempt= []
+				attempt= [self.num]
 				for i in range(0, self.num):
 					while self.getshape == 'null':
 						pass
