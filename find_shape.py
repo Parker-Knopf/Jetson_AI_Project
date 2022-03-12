@@ -45,8 +45,8 @@ class FindShape():
 		# print the detections
 		# print("detected {:d} shapes in image".format(len(detections)))
 
-		# for detection in detections:
-		# 	print(detection)
+		for detection in detections:
+			print(detection)
 
 		# update the title bar
 		self.output.SetStatus("{:s} | Network {:.0f} FPS".format(self.opt.network, self.net.GetNetworkFPS()))
@@ -82,7 +82,7 @@ class Password():
 			return True
 
 	def getshape(self):
-		print(self.findShape.determineClass())
+		print("Class", self.findShape.determineClass())
 		return self.findShape.determineClass()
 
 	def main(self):
