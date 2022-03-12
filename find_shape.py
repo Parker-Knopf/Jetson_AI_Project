@@ -74,7 +74,7 @@ class Password():
 		password = []
 		for i in range(0, num):
 			print(i)
-			password[i] = random.choice(parameters)
+			#password[i] = random.choice(parameters)
 		return password
 
 	def checkPassword(self, attempt):
