@@ -1,0 +1,1 @@
+python3 find_shape.py --model=resnet18.onnx --labels=labels.txt --input_blob=input_0 --output_blob=output_0 /dev/video0
