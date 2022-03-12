@@ -34,31 +34,35 @@ class FindShape():
 		# create video sources & outputs
 		self.input = jetson.utils.videoSource(self.opt.input_URI, argv=sys.argv)
 		self.output = jetson.utils.videoOutput(self.opt.output_URI, argv=sys.argv)
+		self.font = jetson.utils.cudaFont()
 
 	def determineClass(self):
 		# capture the next image
 		img = self.input.Capture()
 
-		# detect objects in the image (with overlay)
-		detections = self.net.Detect(img, overlay=self.opt.overlay)
+		# classify the image
+		class_id, confidence = self.net.Classify(img)
 
-		# print the detections
-		# print("detected {:d} shapes in image".format(len(detections)))
+		# find the object description
+		class_desc = self.net.GetClassDesc(class_id)
 
-		for detection in detections:
-			print(detection)
+		# overlay the result on the image	
+		self.font.OverlayText(img, img.width, img.height, "{:05.2f}% {:s}".format(confidence * 100, class_desc), 5, 5, self.font.White, self.font.Gray40)
+		
+		# render the image
+		self.output.Render(img)
 
 		# update the title bar
-		self.output.SetStatus("{:s} | Network {:.0f} FPS".format(self.opt.network, self.net.GetNetworkFPS()))
+		self.output.SetStatus("{:s} | Network {:.0f} FPS".format(self.net.GetNetworkName(), self.net.GetNetworkFPS()))
 
 		# print out performance info
-		# self.net.PrintProfilerTimes()
+		self.net.PrintProfilerTimes()
 
 		# exit on input/output EOS
 		if not self.input.IsStreaming() or not self.output.IsStreaming():
 			return
 		
-		return detections
+		return class_id
 
 class Password():
 
