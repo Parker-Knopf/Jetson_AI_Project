@@ -3,7 +3,7 @@ import jetson.inference
 import jetson.utils
 
 import argparse
-import sys
+import sys, os
 
 import random
 import time
@@ -38,12 +38,22 @@ class FindShape():
 		self.output = jetson.utils.videoOutput(self.opt.output_URI, argv=sys.argv)
 		self.font = jetson.utils.cudaFont()
 
+	# Disable
+	def blockPrint():
+		sys.stdout = open(os.devnull, 'w')
+
+	# Restore
+	def enablePrint():
+		sys.stdout = sys.__stdout__
+
 	def determineClass(self):
 		# capture the next image
 		img = self.input.Capture()
 
 		# classify the image
+		self.blockPrint()
 		class_id, confidence = self.net.Classify(img)
+		self.enablePrint()
 
 		# find the object description
 		class_desc = self.net.GetClassDesc(class_id)
@@ -64,7 +74,7 @@ class FindShape():
 		if not self.input.IsStreaming() or not self.output.IsStreaming():
 			return
 		
-		return class_id
+		return class_desc
 
 class Password():
 
