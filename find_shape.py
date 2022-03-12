@@ -47,13 +47,12 @@ class FindShape():
 		sys.stdout = sys.__stdout__
 
 	def determineClass(self):
+		self.blockPrint()
 		# capture the next image
 		img = self.input.Capture()
 
 		# classify the image
-		self.blockPrint()
 		class_id, confidence = self.net.Classify(img)
-		self.enablePrint()
 
 		# find the object description
 		class_desc = self.net.GetClassDesc(class_id)
@@ -74,6 +73,7 @@ class FindShape():
 		if not self.input.IsStreaming() or not self.output.IsStreaming():
 			return
 		
+		self.enablePrint()
 		return class_desc
 
 class Password():
