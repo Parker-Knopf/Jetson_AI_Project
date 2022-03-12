@@ -71,10 +71,10 @@ class Password():
 
 
 	def createPassword(self, num, parameters):
-		password = [num]
+		password = []
 		for i in range(0, num):
-			# password[i] = random.choice(parameters)
-			password[i] = 'hello'
+			print(i)
+			password[i] = random.choice(parameters)
 		return password
 
 	def checkPassword(self, attempt):
