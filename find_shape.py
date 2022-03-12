@@ -58,7 +58,7 @@ class FindShape():
 		self.output.SetStatus("{:s} | Network {:.0f} FPS".format(self.net.GetNetworkName(), self.net.GetNetworkFPS()))
 
 		# print out performance info
-		self.net.PrintProfilerTimes()
+		#self.net.PrintProfilerTimes()
 
 		# exit on input/output EOS
 		if not self.input.IsStreaming() or not self.output.IsStreaming():
