@@ -1,4 +1,3 @@
-BACKGROUND
+null
 circle
 square
-triangle
