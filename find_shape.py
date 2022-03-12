@@ -39,11 +39,11 @@ class FindShape():
 		self.font = jetson.utils.cudaFont()
 
 	# Disable
-	def blockPrint():
+	def blockPrint(self):
 		sys.stdout = open(os.devnull, 'w')
 
 	# Restore
-	def enablePrint():
+	def enablePrint(self):
 		sys.stdout = sys.__stdout__
 
 	def determineClass(self):
