@@ -37,7 +37,7 @@ class FindShape():
 
 	def determineClass(self):
 		# capture the next image
-		img = input.Capture()
+		img = self.input.Capture()
 
 		# detect objects in the image (with overlay)
 		detections = self.net.Detect(img, overlay=self.opt.overlay)
