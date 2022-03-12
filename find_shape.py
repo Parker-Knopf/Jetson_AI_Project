@@ -17,10 +17,12 @@ class FindShape():
 
 		self.parser.add_argument("input_URI", type=str, default="", nargs='?', help="URI of the input stream")
 		self.parser.add_argument("output_URI", type=str, default="", nargs='?', help="URI of the output stream")
-		self.parser.add_argument("--network", type=str, default="ssd-mobilenet-v2", help="pre-trained model to load (see below for options)")
-		self.parser.add_argument("--overlay", type=str, default="box,labels,conf", help="detection overlay flags (e.g. --overlay=box,labels,conf)\nvalid combinations are:  'box', 'labels', 'conf', 'none'")
-		self.parser.add_argument("--threshold", type=float, default=0.5, help="minimum detection threshold to use") 
-		
+		self.parser.add_argument("--network", type=str, default="googlenet", help="pre-trained model to load (see below for options)")
+		self.parser.add_argument("--camera", type=str, default="0", help="index of the MIPI CSI camera to use (e.g. CSI camera 0)\nor for VL42 cameras, the /dev/video device to use.\nby default, MIPI CSI camera 0 will be used.")
+		self.parser.add_argument("--width", type=int, default=1280, help="desired width of camera stream (default is 1280 pixels)")
+		self.parser.add_argument("--height", type=int, default=720, help="desired height of camera stream (default is 720 pixels)")
+		self.parser.add_argument('--headless', action='store_true', default=(), help="run without display")
+
 		try:
 			self.opt = self.parser.parse_known_args()[0]
 		except:
@@ -29,7 +31,7 @@ class FindShape():
 			sys.exit(0)
 
 		# load the object detection network
-		self.net = jetson.inference.detectNet(self.opt.network, sys.argv, self.opt.threshold)
+		self.net = jetson.inference.imageNet(self.opt.network, sys.argv)
 
 		# create video sources & outputs
 		self.input = jetson.utils.videoSource(self.opt.input_URI, argv=sys.argv)
