@@ -72,7 +72,7 @@ class Password():
 
 	def createPassword(self, num, parameters):
 		password = [num]
-		for i in range(0, num):
+		for i in range(0, num-1):
 			print(i)
 			password[i] = random.choice(parameters)
 		return password
