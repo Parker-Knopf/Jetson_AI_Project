@@ -29,7 +29,7 @@ class FindShape():
 			sys.exit(0)
 
 		# load the object detection network
-		self.net = jetson.inference.detectNet(self.opt.network, sys.argv, opt.threshold)
+		self.net = jetson.inference.detectNet(self.opt.network, sys.argv, self.opt.threshold)
 
 		# create video sources & outputs
 		self.input = jetson.utils.videoSource(self.opt.input_URI, argv=sys.argv)
