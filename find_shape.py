@@ -88,10 +88,10 @@ class Password():
 			return True
 
 	def getshape(self):
-		classID = int(self.findShape.determineClass())
-		if classID == int(1):
+		classID = self.findShape.determineClass()
+		if int(classID) == int(1):
 			return self.parameters[0]
-		elif classID == int(2):
+		elif int(classID) == int(2):
 			return self.parameters[1]
 		return 'null'
 
