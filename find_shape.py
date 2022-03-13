@@ -85,7 +85,7 @@ class Password():
 			return True
 
 	def getshape(self):
-		# print("Class:", self.findShape.determineClass())
+		self.findShape.determineClass()
 		return 'null'
 
 	def main(self):
