@@ -13,68 +13,46 @@ class FindShape():
 
 	def __init__(self):
 		# parse the command line
-		self.parser = argparse.ArgumentParser(description="Locate objects in a live camera stream using an object detection DNN.")
+		parser = argparse.ArgumentParser(description="Locate objects in a live camera stream using an object detection DNN.")
 
-		self.parser.add_argument("input_URI", type=str, default="", nargs='?', help="URI of the input stream")
-		self.parser.add_argument("output_URI", type=str, default="", nargs='?', help="URI of the output stream")
-		self.parser.add_argument("--network", type=str, default="googlenet", help="pre-trained model to load (see below for options)")
-		self.parser.add_argument("--camera", type=str, default="0", help="index of the MIPI CSI camera to use (e.g. CSI camera 0)\nor for VL42 cameras, the /dev/video device to use.\nby default, MIPI CSI camera 0 will be used.")
-		self.parser.add_argument("--width", type=int, default=1280, help="desired width of camera stream (default is 1280 pixels)")
-		self.parser.add_argument("--height", type=int, default=720, help="desired height of camera stream (default is 720 pixels)")
-		self.parser.add_argument('--headless', action='store_true', default=(), help="run without display")
+		parser.add_argument("input_URI", type=str, default="", nargs='?', help="URI of the input stream")
+		parser.add_argument("output_URI", type=str, default="", nargs='?', help="URI of the output stream")
+		parser.add_argument("--network", type=str, default="ssd-mobilenet-v2", help="pre-trained model to load (see below for options)")
+		parser.add_argument("--overlay", type=str, default="box,labels,conf", help="detection overlay flags (e.g. --overlay=box,labels,conf)\nvalid combinations are:  'box', 'labels', 'conf', 'none'")
+		parser.add_argument("--threshold", type=float, default=0.5, help="minimum detection threshold to use") 
 
 		try:
-			self.opt = self.parser.parse_known_args()[0]
+			self.opt = parser.parse_known_args()[0]
 		except:
 			print("")
-			self.parser.print_help()
+			parser.print_help()
 			sys.exit(0)
 
 		# load the object detection network
-		self.net = jetson.inference.imageNet(self.opt.network, sys.argv)
+		self.net = jetson.inference.detectNet(self.opt.network, sys.argv, opt.threshold)
 
 		# create video sources & outputs
 		self.input = jetson.utils.videoSource(self.opt.input_URI, argv=sys.argv)
 		self.output = jetson.utils.videoOutput(self.opt.output_URI, argv=sys.argv)
-		self.font = jetson.utils.cudaFont()
-
-	# Disable
-	def blockPrint(self):
-		sys.stdout = open(os.devnull, 'w')
-
-	# Restore
-	def enablePrint(self):
-		sys.stdout = sys.__stdout__
 
 	def determineClass(self):
-		self.blockPrint()
 		# capture the next image
 		img = self.input.Capture()
 
-		# classify the image
-		class_id, confidence = self.net.Classify(img)
+		# detect objects in the image (with overlay)
+		detections = self.net.Detect(img, overlay=self.opt.overlay)
 
-		# find the object description
-		class_desc = self.net.GetClassDesc(class_id)
-
-		# overlay the result on the image	
-		self.font.OverlayText(img, img.width, img.height, "{:05.2f}% {:s}".format(confidence * 100, class_desc), 5, 5, self.font.White, self.font.Gray40)
-		
 		# render the image
 		self.output.Render(img)
 
 		# update the title bar
-		self.output.SetStatus("{:s} | Network {:.0f} FPS".format(self.net.GetNetworkName(), self.net.GetNetworkFPS()))
-
-		# print out performance info
-		#self.net.PrintProfilerTimes()
+		self.output.SetStatus("{:s} | Network {:.0f} FPS".format(self.opt.network, self.net.GetNetworkFPS()))
 
 		# exit on input/output EOS
 		if not self.input.IsStreaming() or not self.output.IsStreaming():
 			return
 		
-		self.enablePrint()
-		return class_desc
+		return detections
 
 class Password():
 
@@ -98,8 +76,8 @@ class Password():
 			return True
 
 	def getshape(self):
-		print("Class", self.findShape.determineClass())
-		return self.findShape.determineClass()
+		print("Class:", self.findShape.determineClass())
+		return 'null'
 
 	def main(self):
 		'''main running loop'''
