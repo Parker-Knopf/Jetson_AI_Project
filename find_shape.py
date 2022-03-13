@@ -62,7 +62,7 @@ class FindShape():
 			return 'null'
 		
 		for detection in detections:
-			return str(detection.ClassID)
+			return (detection.ClassID)
 
 		return 'null'
 
@@ -88,7 +88,11 @@ class Password():
 			return True
 
 	def getshape(self):
-		print("CLASS:", self.findShape.determineClass())
+		classID = int(self.findShape.determineClass())
+		if classID == int(1):
+			return self.parameters[0]
+		elif classID == int(2):
+			return self.parameters[1]
 		return 'null'
 
 	def main(self):
@@ -103,18 +107,25 @@ class Password():
 				print('Try to guess the password now by placing either a circle or square in the frame of the camera.')
 
 				attempt= [self.num]
+				threshold = 2
 				for i in range(0, self.num-1):
-					while self.getshape == 'null':
+					print("\nPlace object in camera frame now for password element: %d" % i)
+					while self.getshape() == 'null':
 						pass
 					time_start = time.time()
-					while self.getshape != 'null':
+					while self.getshape() != 'null' and ((time.time() - time_start) < threshold):
 						attempt[i] = self.getshape()
 					time_stop = time.time()			
-					threshold = time_stop - time_start
-					if threshold < 1:
+					duration = time_stop - time_start
+					if duration < threshold:
 						i = i - 1
 					else:
-						print("Recorded:", attempt[i])
+						print("Recorded element %d: %s" % i, attempt[i])
+
+						print("\nRemove object from frame now:")
+
+						while self.getshape() == attempt[i]:
+							pass
 				
 				if self.checkPassword(attempt):
 					print("Succefuly guessed the password!")
