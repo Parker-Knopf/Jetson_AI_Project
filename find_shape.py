@@ -37,10 +37,16 @@ class FindShape():
 
 	def determineClass(self):
 		# capture the next image
-		img = self.input.Capture()
+		img = input.Capture()
 
 		# detect objects in the image (with overlay)
 		detections = self.net.Detect(img, overlay=self.opt.overlay)
+
+		# print the detections
+		print("detected {:d} objects in image".format(len(detections)))
+
+		for detection in detections:
+			print(detection)
 
 		# render the image
 		self.output.Render(img)
@@ -48,12 +54,12 @@ class FindShape():
 		# update the title bar
 		self.output.SetStatus("{:s} | Network {:.0f} FPS".format(self.opt.network, self.net.GetNetworkFPS()))
 
+		# print out performance info
+		self.net.PrintProfilerTimes()
+
 		# exit on input/output EOS
 		if not self.input.IsStreaming() or not self.output.IsStreaming():
-			return
-		
-		for detection in detections:
-			return detection
+			return 'null'
 		
 		return 'null'
 
@@ -79,7 +85,7 @@ class Password():
 			return True
 
 	def getshape(self):
-		print("Class:", self.findShape.determineClass())
+		# print("Class:", self.findShape.determineClass())
 		return 'null'
 
 	def main(self):
