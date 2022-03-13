@@ -73,7 +73,7 @@ class Password():
 
 		self.num = 2
 		self.parameters = ['circle', 'square']
-		self.password = self.createPassword(self.num, self.parameters)
+		self.password = self.createPassword()
 
 
 	def createPassword(self):
