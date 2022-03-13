@@ -43,10 +43,10 @@ class FindShape():
 		detections = self.net.Detect(img, overlay=self.opt.overlay)
 
 		# print the detections
-		print("detected {:d} objects in image".format(len(detections)))
+		# print("detected {:d} objects in image".format(len(detections)))
 
-		for detection in detections:
-			print(detection)
+		# for detection in detections:
+		# 	print(detection)
 
 		# render the image
 		self.output.Render(img)
@@ -61,6 +61,9 @@ class FindShape():
 		if not self.input.IsStreaming() or not self.output.IsStreaming():
 			return 'null'
 		
+		for detection in detections:
+			return str(detection.classID)
+
 		return 'null'
 
 class Password():
