@@ -100,8 +100,8 @@ class Password():
 
 		try:
 
-			print('\nA new password has been created!\n')
 			self.createPassword(self.num, self.parameters)
+			print('\nA new password has been created!\n')
 			do = 1
 			while do:
 				print('Try to guess the password now by placing either a circle or square in the frame of the camera.')
@@ -109,7 +109,7 @@ class Password():
 				attempt= [self.num]
 				threshold = 2
 				for i in range(0, self.num-1):
-					print("\nPlace object in camera frame now for password element: %d" % i)
+					print(f"\nPlace object in camera frame now for password element: {i}")
 					while self.getshape() == 'null':
 						pass
 					time_start = time.time()
@@ -120,7 +120,7 @@ class Password():
 					if duration < threshold:
 						i = i - 1
 					else:
-						print("Recorded element %d: %s" % i, attempt[i])
+						print(f"Recorded element {i}: {attempt[i]}")
 
 						print("\nRemove object from frame now:")
 
