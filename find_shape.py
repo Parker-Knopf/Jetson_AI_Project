@@ -76,11 +76,13 @@ class Password():
 		self.password = self.createPassword(self.num, self.parameters)
 
 
-	def createPassword(self, num, parameters):
-		password = [num]
-		for i in range(0, num-1):
-			print(i)
-			password[i] = random.choice(parameters)
+	def createPassword(self):
+		password = [self.num]
+		print("Password:")
+		for i in range(0, self.num-1):
+			password[i] = random.choice(self.parameters)
+			print(f"element {i}: {password[i]}")
+
 		return password
 
 	def checkPassword(self, attempt):
@@ -100,7 +102,7 @@ class Password():
 
 		try:
 
-			self.createPassword(self.num, self.parameters)
+			self.createPassword()
 			print('\nA new password has been created!\n')
 			do = 1
 			while do:
@@ -111,9 +113,11 @@ class Password():
 				for i in range(0, self.num-1):
 					print(f"\nPlace object in camera frame now for password element: {i}")
 					while self.getshape() == 'null':
+						print('here')
 						pass
 					time_start = time.time()
 					while self.getshape() != 'null' and ((time.time() - time_start) < threshold):
+						print("Think")
 						attempt[i] = self.getshape()
 					time_stop = time.time()			
 					duration = time_stop - time_start
@@ -125,6 +129,7 @@ class Password():
 						print("\nRemove object from frame now:")
 
 						while self.getshape() == attempt[i]:
+							print("HERE")
 							pass
 				
 				if self.checkPassword(attempt):
