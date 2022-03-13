@@ -52,8 +52,10 @@ class FindShape():
 		if not self.input.IsStreaming() or not self.output.IsStreaming():
 			return
 		
-		detection = detections[0]
-		return detection
+		for detection in detections:
+			return detection
+		
+		return 'null'
 
 class Password():
 
