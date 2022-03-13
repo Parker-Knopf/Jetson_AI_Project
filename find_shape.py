@@ -62,7 +62,7 @@ class FindShape():
 			return 'null'
 		
 		for detection in detections:
-			return str(detection.classID)
+			return str(detection.ClassID)
 
 		return 'null'
 
