@@ -71,7 +71,7 @@ class Password():
 	def __init__(self):
 		self.findShape = FindShape()
 
-		self.num = 3
+		self.num = 2
 		self.parameters = ['circle', 'square']
 		self.password = self.createPassword()
 		self.getshape()
@@ -111,7 +111,7 @@ class Password():
 			while do:
 				print('Try to guess the password now by placing either a circle or square in the frame of the camera.')
 
-				attempt= [self.num]
+				attempt= []
 				threshold = 2
 				for i in range(0, self.num):
 					print(f"\nPlace object in camera frame now for password element: {i}")
@@ -119,7 +119,7 @@ class Password():
 						pass
 					time_start = time.time()
 					while self.getshape() != 'null' and ((time.time() - time_start) < threshold):
-						attempt[i] = self.getshape()
+						attempt.append(self.getshape())
 					time_stop = time.time()			
 					duration = time_stop - time_start
 					if duration < threshold:
