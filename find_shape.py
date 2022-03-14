@@ -80,7 +80,10 @@ class Password():
 	def createPassword(self):
 		password = [self.num]
 		print("Password:")
+		print(password)
+		print(self.num-1)
 		for i in range(0, self.num-1):
+			print(i)
 			password[i] = random.choice(self.parameters)
 			print(f"element {i}: {password[i]}")
 
