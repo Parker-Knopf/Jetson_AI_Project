@@ -71,7 +71,7 @@ class Password():
 	def __init__(self):
 		self.findShape = FindShape()
 
-		self.num = 2
+		self.num = 3
 		self.parameters = ['circle', 'square']
 		self.password = self.createPassword()
 		self.getshape()
@@ -80,7 +80,7 @@ class Password():
 	def createPassword(self):
 		password = [self.num]
 		print("Password:")
-		for i in range(0, self.num):
+		for i in range(0, self.num-1):
 			password[i] = random.choice(self.parameters)
 			print(f"element {i}: {password[i]}")
 
