@@ -88,6 +88,8 @@ class Password():
 		return password
 
 	def checkPassword(self, attempt):
+		print(attempt)
+		print(self.password)
 		if attempt == self.password:
 			return True
 		return False
