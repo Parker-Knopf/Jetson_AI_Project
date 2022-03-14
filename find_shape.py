@@ -133,7 +133,8 @@ class Password():
 
 						while self.getshape() != 'null':
 							pass
-					i+= i
+					i += i
+					print(i)
 				
 				if self.checkPassword(attempt):
 					print("Succefuly guessed the password!\n")
