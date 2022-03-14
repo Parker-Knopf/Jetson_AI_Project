@@ -1,10 +1,10 @@
 sudo apt install zip unzip
-cd Jetson_AI_Project
+cd Object_Password_Prototype
 unzip ssd-mobilenet.zip
 mkdir model
 cd model
-mkdir objectPassword
+mkdir shapes
 cd ../
-mv ssd-mobilenet.onnx ~/Jetson_AI_Project/model/objectPassword
-mv labels.txt ~/Jetson_AI_Project/model/objectPassword
-chmod +x start.sh
+mv ssd-mobilenet.onnx ~/Object_Password_Prototype/model/shapes
+mv labels.txt ~/Object_Password_Prototype/model/shapes
+chmod +x run.sh
