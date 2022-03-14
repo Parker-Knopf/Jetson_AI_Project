@@ -111,7 +111,7 @@ class Password():
 
 				attempt= [self.num]
 				threshold = 2
-				for i in range(0, self.num-1):
+				for i in range(0, self.num):
 					print(f"\nPlace object in camera frame now for password element: {i}")
 					while self.getshape() == 'null':
 						pass
