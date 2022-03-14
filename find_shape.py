@@ -125,7 +125,7 @@ class Password():
 					duration = time_stop - time_start
 					if duration < threshold:
 						print("NOPE", i)
-						i = i - 1
+						i -= i
 					else:
 						print(f"Recorded element {i}: {attempt[i]}")
 
@@ -133,6 +133,7 @@ class Password():
 
 						while self.getshape() == attempt[i]:
 							pass
+					i+= i
 				
 				if self.checkPassword(attempt):
 					print("Succefuly guessed the password!\n")
