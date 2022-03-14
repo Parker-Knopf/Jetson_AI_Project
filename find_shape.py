@@ -121,7 +121,7 @@ class Password():
 						pass
 					time_start = time.time()
 					while self.getshape() != 'null' and ((time.time() - time_start) < threshold):
-						attempt.append(self.getshape())
+						attempt_val = self.getshape()
 					time_stop = time.time()			
 					duration = time_stop - time_start
 					if duration < threshold:
@@ -129,6 +129,7 @@ class Password():
 						i -= 1
 					else:
 						print(f"Recorded element {i}: {attempt[i]}")
+						attempt.append(attempt_val)
 
 						print("\nRemove object from frame now:")
 
