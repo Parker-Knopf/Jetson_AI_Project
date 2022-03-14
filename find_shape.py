@@ -115,8 +115,10 @@ class Password():
 				attempt= []
 				threshold = 2
 				i = 0
+				fault = False
 				while i < self.num:
-					print(f"\nPlace object in camera frame now for password element: {i}")
+					if not fault:
+						print(f"\nPlace object in camera frame now for password element: {i}")
 					while self.getshape() == 'null':
 						pass
 					time_start = time.time()
@@ -125,8 +127,8 @@ class Password():
 					time_stop = time.time()			
 					duration = time_stop - time_start
 					if duration < threshold:
-						print("NOPE", i)
 						i -= 1
+						fault = True
 					else:
 						attempt.append(attempt_val)
 						print(f"Recorded element {i}: {attempt[i]}")
@@ -135,9 +137,9 @@ class Password():
 
 						while self.getshape() != 'null':
 							pass
+						fault = False
 					i += 1
 				
-				print(attempt)
 				if self.checkPassword(attempt):
 					print("\n\nSuccefuly guessed the password!\n")
 					do = 0
