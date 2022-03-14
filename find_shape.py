@@ -87,7 +87,10 @@ class Password():
 		return password
 
 	def checkPassword(self, attempt):
-		if attempt == self.password:
+		passw= self.password
+		print(attempt)
+		print(passw)
+		if attempt == passw:
 			return True
 		return False
 
@@ -139,7 +142,6 @@ class Password():
 						fault = False
 					i += 1
 				
-				print(attempt)
 				if self.checkPassword(attempt):
 					print("\n\nSuccefuly guessed the password!\n")
 					do = 0
