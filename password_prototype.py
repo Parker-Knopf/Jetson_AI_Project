@@ -73,8 +73,8 @@ class Password():
 
 		self.num = 2
 		self.parameters = ['circle', 'square']
-		self.password_val = self.createPassword()
-		self.password = self.password_val
+		password_val = self.createPassword()
+		self.password = password_val
 		self.getshape()
 
 
@@ -88,10 +88,7 @@ class Password():
 		return password
 
 	def checkPassword(self, attempt):
-		passw= self.password
-		print(attempt)
-		print(passw)
-		if attempt == passw:
+		if attempt == self.password:
 			return True
 		return False
 
