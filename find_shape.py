@@ -78,13 +78,11 @@ class Password():
 
 
 	def createPassword(self):
-		password = [self.num]
+		password = []
 		print("Password:")
-		print(password)
-		print(self.num-1)
-		for i in range(0, self.num-1):
+		for i in range(0, self.num):
 			print(i)
-			password[i] = random.choice(self.parameters)
+			password.append(random.choice(self.parameters))
 			print(f"element {i}: {password[i]}")
 
 		return password
@@ -115,7 +113,7 @@ class Password():
 
 				attempt= [self.num]
 				threshold = 2
-				for i in range(0, self.num-1):
+				for i in range(0, self.num):
 					print(f"\nPlace object in camera frame now for password element: {i}")
 					while self.getshape() == 'null':
 						pass
