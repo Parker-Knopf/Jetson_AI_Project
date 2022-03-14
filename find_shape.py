@@ -131,7 +131,7 @@ class Password():
 
 						print("\nRemove object from frame now:")
 
-						while self.getshape() == attempt[i]:
+						while self.getshape() != 'null':
 							pass
 					i+= i
 				
