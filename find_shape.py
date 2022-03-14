@@ -139,6 +139,7 @@ class Password():
 						fault = False
 					i += 1
 				
+				print(attempt)
 				if self.checkPassword(attempt):
 					print("\n\nSuccefuly guessed the password!\n")
 					do = 0
