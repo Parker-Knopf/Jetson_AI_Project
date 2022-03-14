@@ -109,6 +109,7 @@ class Password():
 			print('\n########## OBJECT PASSWORD PROTOTYPE ##########\n')
 			do = 1
 			while do:
+				print('\n########## ENTER PASSWORD ##########\n')
 				print('Try to guess the password now by placing either a circle or square in the frame of the camera.')
 
 				attempt= []
@@ -135,11 +136,12 @@ class Password():
 							pass
 					i += 1
 				
+				print(attempt)
 				if self.checkPassword(attempt):
-					print("Succefuly guessed the password!\n")
+					print("\n\nSuccefuly guessed the password!\n")
 					do = 0
 				else:
-					print("Password incorrect, try again\n")
+					print("\n\nPassword incorrect, try again\n")
 
 		except KeyboardInterrupt:
 			pass
