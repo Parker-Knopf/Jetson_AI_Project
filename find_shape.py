@@ -123,6 +123,7 @@ class Password():
 					time_stop = time.time()			
 					duration = time_stop - time_start
 					if duration < threshold:
+						print("NOPE")
 						i = i - 1
 					else:
 						print(f"Recorded element {i}: {attempt[i]}")
