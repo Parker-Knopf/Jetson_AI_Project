@@ -80,7 +80,7 @@ class Password():
 	def createPassword(self):
 		password = [self.num]
 		print("Password:")
-		for i in range(0, self.num-1):
+		for i in range(0, self.num):
 			password[i] = random.choice(self.parameters)
 			print(f"element {i}: {password[i]}")
 
@@ -89,6 +89,7 @@ class Password():
 	def checkPassword(self, attempt):
 		if attempt == self.password:
 			return True
+		return False
 
 	def getshape(self):
 		classID = self.findShape.determineClass()
@@ -131,10 +132,10 @@ class Password():
 							pass
 				
 				if self.checkPassword(attempt):
-					print("Succefuly guessed the password!")
+					print("Succefuly guessed the password!\n")
 					do = 0
 				else:
-					print("Password incorrect, try again")
+					print("Password incorrect, try again\n")
 
 		except KeyboardInterrupt:
 			pass
