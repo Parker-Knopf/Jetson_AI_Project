@@ -81,7 +81,6 @@ class Password():
 		password = []
 		print("Password:")
 		for i in range(0, self.num):
-			print(i)
 			password.append(random.choice(self.parameters))
 			print(f"element {i}: {password[i]}")
 
@@ -105,8 +104,8 @@ class Password():
 
 		try:
 
-			self.createPassword()
 			print('\n########## OBJECT PASSWORD PROTOTYPE ##########\n')
+			self.createPassword()
 			do = 1
 			while do:
 				print('\n########## ENTER PASSWORD ##########\n')
