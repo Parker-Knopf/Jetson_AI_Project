@@ -128,8 +128,8 @@ class Password():
 						print("NOPE", i)
 						i -= 1
 					else:
-						print(f"Recorded element {i}: {attempt[i]}")
 						attempt.append(attempt_val)
+						print(f"Recorded element {i}: {attempt[i]}")
 
 						print("\nRemove object from frame now:")
 
