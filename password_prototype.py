@@ -74,7 +74,11 @@ class Password():
 		self.num = 2
 		self.parameters = ['circle', 'square']
 		password_val = self.createPassword()
-		self.password = password_val
+		#Create static password
+		self.password = []
+		for i in range(0,self.num):
+			self.password.append(str(password_val[i]))
+
 		self.getshape()
 
 
