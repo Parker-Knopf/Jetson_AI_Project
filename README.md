@@ -33,7 +33,7 @@ Flow these required steps to set up the dependencies for this projects. If your 
 ``` bash
 $ cd ~/
 $ git clone https://github.com/Parker-Knopf/Object_Password_Prototype.git
-$ cd mask-detection
+$ cd Object_Password_Prototype
 $ chmod +x setup.sh
 $ ./setup.sh
 ```
@@ -42,7 +42,7 @@ $ ./setup.sh
 ``` bash
 $ cd ~/jetson-inference
 $ docker/run.sh --volume ~/Object_Password_Prototype:/Object_Password_Prototype
-$ cd /mask-detection
+$ cd /Object_Password_Prototype
 ```
 # Runing the Program
 
